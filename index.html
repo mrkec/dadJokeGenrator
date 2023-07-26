@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dad joke Genrator</title>
+    <style>
+        
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Baloo 2', cursive;
+        }
+        .container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 23px;
+            color: #fff;
+            background-color: #f17975;
+            height: 100vh;
+            text-align: center;
+            flex-wrap: wrap;
+        }
+        .container h1{
+            margin: 12px 0px;
+        }
+        .joke{
+            /* display: f; */
+        }
+        #jokeContainer{
+            display: flex;
+            flex-wrap: wrap;
+            /* border: 1px solid black; */
+            /* background-color: red; */
+            padding: 23px;
+            margin: 12px;
+        }
+        button{
+            padding: 6px 23px;
+            border: none;
+            background-color: #f1c675;
+            font-size: 23px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dad joke Genertor</h1>
+        <hr style="width: 230px; height: 3px;">
+        <div class="joke">
+            <div id="jokeContainer">
+                
+                <span id="joke"></span>
+            </div>
+            <div class="button" >
+                <button id="getJoke">Get Joke</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- YjKCWwQJaGoaFb8v9mGmUw==Kvgmxl6jMcAlL7Kp -->
+
+    <script>
+        let jokeBtn =  document.getElementById("getJoke");
+        let joke =document.getElementById("joke");
+        // console.log(jokeBtn)
+         
+        const  getDadJoke =  async() =>{
+
+            let limit =10;
+            const apikey = " YjKCWwQJaGoaFb8v9mGmUw==Kvgmxl6jMcAlL7Kp";
+
+            const options={
+                method:"Get",
+                headers: { 'X-Api-Key':apikey},
+            }
+            joke.innerHTML ="Updating..........";
+            jokeBtn.disabled = true;
+            jokeBtn.innerText = "Loading......."
+            const res = await fetch(`https://api.api-ninjas.com/v1/dadjokes?limit=${limit}`,options);
+            // console.log(res);
+            const data =await res.json();
+            console.log(data);
+            // joke.innerHTML ="Updating";
+            jokeBtn.disabled = false;
+            jokeBtn.innerText = "Get New Joke";
+            joke.style.border="2px solid black";
+            joke.style.padding="23px";
+            // joke.style.backgroundColor="black";
+            // joke.style.height="100px";
+            
+            joke.innerHTML=data[0].joke; 
+            // jokeBtn.innerHTML ="Get JOke"
+            // // crud
+            // create 
+            // read
+            // update
+            // delete
+
+
+            // console.log("joke")
+
+        }
+
+        jokeBtn.addEventListener("click",getDadJoke)
+    </script>
+    
+</body>
+</html>
